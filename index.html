@@ -12,81 +12,276 @@
       --surface2: #1a2235;
       --accent: #2563eb;
       --accent2: #3b82f6;
-      --accent-glow: rgba(37,99,235,0.3);
+      --accent-glow: rgba(37,99,235,0.35);
       --text: #e2e8f0;
       --muted: #94a3b8;
       --border: rgba(37,99,235,0.2);
+      --border-hover: rgba(59,130,246,0.6);
+      --shadow-glow: 0 8px 32px rgba(37,99,235,0.25);
+      --gradient: linear-gradient(135deg, #2563eb, #7c3aed);
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.6; }
+    body { background: var(--bg); color: var(--text); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.6; overflow-x: hidden; }
 
+    /* PARTICLES */
+    #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: var(--accent2); opacity: 0.12;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10%  { opacity: 0.12; }
+      90%  { opacity: 0.12; }
+      100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
+    }
+
+    /* NAV */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(10,14,26,0.85); backdrop-filter: blur(12px);
+      background: rgba(10,14,26,0.85); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem;
+      padding: 1rem 2rem; transition: box-shadow 0.3s;
     }
-    nav .logo { font-size: 1.1rem; font-weight: 700; color: var(--accent2); letter-spacing: 1px; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    nav .logo {
+      font-size: 1.1rem; font-weight: 800; color: var(--accent2);
+      letter-spacing: 2px; transition: all 0.3s;
+    }
+    nav .logo:hover { text-shadow: 0 0 12px var(--accent-glow); transform: translateY(-2px); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      position: relative; padding-bottom: 4px; transition: color 0.2s;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%); width: 0; height: 2px;
+      background: var(--gradient); border-radius: 2px; transition: width 0.3s;
+    }
     nav a:hover { color: var(--accent2); }
+    nav a:hover::after { width: 100%; }
 
+    /* HERO */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 6rem 2rem 4rem;
-      background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.08) 0%, transparent 70%);
+      padding: 6rem 2rem 4rem; position: relative; z-index: 1;
+      background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.07) 0%, transparent 65%);
     }
-    .hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 4rem; flex-wrap: wrap; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 5rem; flex-wrap: wrap; }
     .hero-text { flex: 1; min-width: 280px; }
-    .hero-tag { display: inline-block; background: var(--accent-glow); border: 1px solid var(--accent); color: var(--accent2); font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px; margin-bottom: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.5rem; }
-    .hero h1 span { color: var(--accent2); }
-    .hero .role { font-size: 1.2rem; color: var(--accent2); font-weight: 600; margin-bottom: 1.2rem; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(37,99,235,0.1); border: 1px solid var(--accent);
+      color: var(--accent2); font-size: 0.75rem; padding: 0.35rem 0.9rem;
+      border-radius: 999px; margin-bottom: 1.4rem; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .hero-tag .dot {
+      width: 7px; height: 7px; background: #22c55e; border-radius: 50%;
+      animation: contact-pulse 2s ease-in-out infinite;
+    }
+    @keyframes contact-pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(1.4); }
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.1; margin-bottom: 0.5rem; }
+    .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero .role { font-size: 1.15rem; color: var(--accent2); font-weight: 600; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 8px; }
+    .hero .role::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--gradient); border-radius: 2px; }
     .hero p { color: var(--muted); max-width: 540px; margin-bottom: 2rem; font-size: 0.97rem; }
     .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn { padding: 0.7rem 1.6rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-    .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
-    .btn-primary:hover { background: var(--accent2); }
+    .btn {
+      padding: 0.75rem 1.7rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; top: -50%; left: -100%;
+      width: 200%; height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn:hover::after { left: 100%; }
+    .btn-primary { background: var(--gradient); color: #fff; border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-glow); }
     .btn-outline { background: transparent; color: var(--accent2); border: 1px solid var(--accent); }
-    .btn-outline:hover { background: var(--accent-glow); }
-    .hero-photo { flex: 0 0 auto; }
-    .hero-photo img { width: 300px; max-width: 100%; border-radius: 16px; border: 2px solid var(--border); box-shadow: 0 0 40px var(--accent-glow); object-fit: cover; }
+    .btn-outline:hover { background: rgba(37,99,235,0.1); transform: translateY(-2px); border-color: var(--accent2); }
 
-    section { padding: 5rem 2rem; }
+    /* HERO PHOTO */
+    .hero-photo { flex: 0 0 auto; position: relative; }
+    .photo-wrapper {
+      position: relative; width: 300px; height: 300px;
+    }
+    .photo-ring {
+      position: absolute; inset: -12px; border-radius: 50%;
+      border: 2px solid transparent;
+      background: var(--gradient) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out; mask-composite: exclude;
+      animation: spin-slow 12s linear infinite;
+    }
+    .photo-ring-2 {
+      position: absolute; inset: -22px; border-radius: 50%;
+      border: 1px dashed rgba(37,99,235,0.3);
+      animation: spin-slow 20s linear infinite reverse;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .photo-glow {
+      position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { opacity: 0.5; transform: scale(1); }
+      50%      { opacity: 1; transform: scale(1.08); }
+    }
+    .hero-photo img {
+      width: 300px; height: 300px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      border: 3px solid var(--surface2);
+      position: relative; z-index: 1;
+      animation: float-img 6s ease-in-out infinite;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+    }
+    @keyframes float-img {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: var(--muted); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+    .scroll-mouse {
+      width: 22px; height: 36px; border: 2px solid var(--muted); border-radius: 12px;
+      display: flex; justify-content: center; padding-top: 6px;
+    }
+    .scroll-wheel {
+      width: 3px; height: 6px; background: var(--accent2); border-radius: 2px;
+      animation: scroll-wheel 2s ease-in-out infinite;
+    }
+    @keyframes scroll-wheel {
+      0%  { opacity: 1; transform: translateY(0); }
+      100%{ opacity: 0; transform: translateY(14px); }
+    }
+    @keyframes bounce-down {
+      0%,100%{ transform: translateX(-50%) translateY(0); }
+      50%    { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; position: relative; z-index: 1; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-title { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .section-title span { color: var(--accent2); }
-    .section-line { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 2.5rem; }
+    .section-header { margin-bottom: 3rem; }
+    .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .section-title span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-line { width: 48px; height: 3px; background: var(--gradient); border-radius: 2px; }
 
+    /* ABOUT */
     #about { background: var(--surface); }
     .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-    .about-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; }
-    .about-card h3 { color: var(--accent2); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .about-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.6rem; position: relative; overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .about-card:hover { border-color: var(--border-hover); transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+    .about-card:hover::before { transform: scaleX(1); }
+    .about-card h3 { color: var(--accent2); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
     .about-card p { color: var(--muted); font-size: 0.9rem; }
 
+    /* SKILLS */
     #skills { background: var(--bg); }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-    .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; }
-    .skill-group h3 { color: var(--accent2); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; position: relative; overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .skill-group::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .skill-group:hover { border-color: var(--border-hover); transform: translateY(-5px); box-shadow: var(--shadow-glow); }
+    .skill-group:hover::before { transform: scaleX(1); }
+    .skill-group h3 {
+      color: var(--accent2); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .skill-group:hover h3 { color: #fff; }
     .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: 0.78rem; padding: 0.3rem 0.7rem; border-radius: 999px; transition: all 0.2s; }
-    .tag:hover { border-color: var(--accent2); color: var(--accent2); }
+    .tag {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); font-size: 0.77rem; padding: 0.3rem 0.75rem;
+      border-radius: 999px; transition: all 0.25s cubic-bezier(0.68,-0.55,0.265,1.55);
+      cursor: default;
+    }
+    .tag:hover { background: rgba(37,99,235,0.15); border-color: var(--accent2); color: var(--accent2); transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px var(--accent-glow); }
 
+    /* STATS BAR */
+    .stats-row { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.4rem 2rem; text-align: center; flex: 1; min-width: 120px;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .stat-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .stat-card .num { font-size: 2rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* CONTACT */
     #contact { background: var(--surface); }
-    .contact-cards { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.5rem; }
-    .contact-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.6rem; display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text); transition: all 0.2s; }
-    .contact-card:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
-    .contact-card svg { width: 20px; height: 20px; fill: var(--accent2); flex-shrink: 0; }
-    .contact-card span { font-size: 0.9rem; }
+    .contact-cards { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+    .contact-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.3rem 1.8rem; display: flex; align-items: center; gap: 1rem;
+      text-decoration: none; color: var(--text); position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+    }
+    .contact-card__shine {
+      position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+      transition: transform 0.6s ease; pointer-events: none;
+    }
+    .contact-card:hover .contact-card__shine { transform: rotate(180deg); }
+    .contact-card:hover { border-color: var(--border-hover); transform: translateY(-8px) scale(1.02); box-shadow: 0 12px 40px rgba(37,99,235,0.2); }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 50%; background: rgba(37,99,235,0.1);
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      transition: all 0.35s;
+    }
+    .contact-card:hover .contact-icon { background: rgba(37,99,235,0.2); transform: scale(1.15) rotate(5deg); border-color: var(--accent2); }
+    .contact-icon svg { width: 18px; height: 18px; fill: var(--accent2); }
+    .contact-info .ctitle { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .contact-info .cval  { font-size: 0.92rem; font-weight: 500; }
 
-    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2.5rem 2rem; color: var(--muted); font-size: 0.82rem;
+      border-top: 1px solid var(--border); position: relative; z-index: 1;
+    }
+    footer .footer-logo { font-size: 1.2rem; font-weight: 800; color: var(--accent2); letter-spacing: 2px; margin-bottom: 0.5rem; }
+    footer p { margin-top: 0.4rem; }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">JCM</div>
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<nav id="navbar">
+  <div class="logo">&lt;JCM/&gt;</div>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -94,10 +289,11 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="hero-tag">Available for projects</span>
+      <span class="hero-tag"><span class="dot"></span>Available for projects</span>
       <h1>John C. <span>Mancilla</span><br>Rocabado</h1>
       <div class="role">AI Mid Software Developer</div>
       <p>AI Software Development Engineer with 4+ years of experience. I design multi-agent systems, automate workflows with Atlassian tools, and build full-stack solutions powered by Claude, MCP servers, and modern cloud infrastructure.</p>
@@ -107,15 +303,33 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="profile.png" alt="John C. Mancilla Rocabado" />
+      <div class="photo-wrapper">
+        <div class="photo-glow"></div>
+        <div class="photo-ring"></div>
+        <div class="photo-ring-2"></div>
+        <img src="profile.png" alt="John C. Mancilla Rocabado" />
+      </div>
     </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>scroll</span>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="section-inner">
-    <div class="section-title">About <span>Me</span></div>
-    <div class="section-line"></div>
+    <div class="section-header">
+      <div class="section-title">About <span>Me</span></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="num">4+</div><div class="label">Years Experience</div></div>
+      <div class="stat-card"><div class="num">3</div><div class="label">Cloud Platforms</div></div>
+      <div class="stat-card"><div class="num">5+</div><div class="label">Languages</div></div>
+      <div class="stat-card"><div class="num">∞</div><div class="label">AI Systems Built</div></div>
+    </div>
     <div class="about-grid">
       <div class="about-card">
         <h3>Background</h3>
@@ -137,10 +351,13 @@
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-title">Technical <span>Skills</span></div>
-    <div class="section-line"></div>
+    <div class="section-header">
+      <div class="section-title">Technical <span>Skills</span></div>
+      <div class="section-line"></div>
+    </div>
     <div class="skills-grid">
       <div class="skill-group">
         <h3>AI &amp; LLM Technologies</h3>
@@ -213,30 +430,73 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-title">Get in <span>Touch</span></div>
-    <div class="section-line"></div>
+    <div class="section-header">
+      <div class="section-title">Get in <span>Touch</span></div>
+      <div class="section-line"></div>
+    </div>
     <div class="contact-cards">
       <a href="mailto:jmanrock@hotmail.com" class="contact-card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <span>jmanrock@hotmail.com</span>
+        <div class="contact-card__shine"></div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="ctitle">Email</div>
+          <div class="cval">jmanrock@hotmail.com</div>
+        </div>
       </a>
       <a href="https://www.linkedin.com/in/jmanrock/" target="_blank" class="contact-card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57A1.46 1.46 0 0 1 14.38 12.11 1.46 1.46 0 0 1 15.84 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
-        <span>linkedin.com/in/jmanrock</span>
+        <div class="contact-card__shine"></div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57A1.46 1.46 0 0 1 14.38 12.11 1.46 1.46 0 0 1 15.84 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="ctitle">LinkedIn</div>
+          <div class="cval">linkedin.com/in/jmanrock</div>
+        </div>
       </a>
       <a href="https://github.com/jcmanrock" target="_blank" class="contact-card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
-        <span>github.com/jcmanrock</span>
+        <div class="contact-card__shine"></div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="ctitle">GitHub</div>
+          <div class="cval">github.com/jcmanrock</div>
+        </div>
       </a>
     </div>
   </div>
 </section>
 
 <footer>
+  <div class="footer-logo">&lt;JCM/&gt;</div>
   <p>&copy; 2026 John C. Mancilla Rocabado &mdash; AI Mid Software Developer</p>
 </footer>
 
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*20+15}s;
+      animation-delay:${Math.random()*15}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+</script>
 </body>
 </html>
