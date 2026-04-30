@@ -240,6 +240,70 @@
     .stat-card .num { font-size: 2rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .stat-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
+    /* EXPERIENCE */
+    #experience { background: var(--bg); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), rgba(124,58,237,0.3));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 2.5rem;
+      transition: all 0.3s ease;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-marker {
+      position: absolute; left: -2.55rem; top: 1.2rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--surface2); border: 2px solid var(--accent);
+      transition: all 0.3s ease; z-index: 1;
+    }
+    .timeline-item.current .timeline-marker {
+      background: var(--accent2); border-color: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+      animation: pulse-marker 2s ease-in-out infinite;
+    }
+    @keyframes pulse-marker {
+      0%,100% { box-shadow: 0 0 0 4px rgba(59,130,246,0.15); }
+      50%      { box-shadow: 0 0 0 8px rgba(59,130,246,0.05); }
+    }
+    .timeline-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.6rem 1.8rem; position: relative; overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .timeline-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--gradient); transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+    .timeline-card:hover { border-color: var(--border-hover); transform: translateX(6px); box-shadow: var(--shadow-glow); }
+    .timeline-card:hover::before { transform: scaleY(1); }
+    .timeline-item.current .timeline-card { border-color: rgba(59,130,246,0.3); }
+    .tc-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.6rem; }
+    .tc-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .tc-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    .badge {
+      font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .badge-period { background: rgba(37,99,235,0.1); border: 1px solid var(--border); color: var(--muted); }
+    .badge-current { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; }
+    .tc-company { font-size: 0.9rem; color: var(--accent2); font-weight: 600; margin-bottom: 0.25rem; }
+    .tc-location { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .tc-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .tc-bullets li {
+      font-size: 0.88rem; color: var(--muted); padding-left: 1.2rem; position: relative;
+      transition: color 0.2s;
+    }
+    .tc-bullets li::before {
+      content: ''; position: absolute; left: 0; top: 0.5em;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gradient);
+    }
+    .timeline-card:hover .tc-bullets li { color: var(--text); }
+
     /* CONTACT */
     #contact { background: var(--surface); }
     .contact-cards { display: flex; flex-wrap: wrap; gap: 1.2rem; }
@@ -285,6 +349,7 @@
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -426,6 +491,106 @@
           <span class="tag">Confluence</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-title">Work <span>Experience</span></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+
+      <!-- NICE CXone -->
+      <div class="timeline-item current">
+        <div class="timeline-marker"></div>
+        <div class="timeline-card">
+          <div class="tc-header">
+            <div class="tc-title">AI Software Development Engineer · Mid Software Developer</div>
+            <div class="tc-badges">
+              <span class="badge badge-period">2021 — Present</span>
+              <span class="badge badge-current">Current</span>
+            </div>
+          </div>
+          <div class="tc-company">NICE CXone</div>
+          <div class="tc-location">Cochabamba, Bolivia &amp; Salt Lake City, USA</div>
+          <ul class="tc-bullets">
+            <li>Designed and developed full-stack solutions in C#, Python, TypeScript, and Java with a strong backend focus on .NET / ASP.NET.</li>
+            <li>Built AI-powered systems and multi-agent architectures using Claude (Opus, Sonnet, Haiku), MCP Servers, and modern LLM tooling.</li>
+            <li>Implemented backend business logic including data normalization, duplicate-prevention rules, and robust database integration (SQL Server, PostgreSQL, MySQL).</li>
+            <li>Automated engineering workflows with Atlassian tools (Jira, Confluence) and CI/CD pipelines (GitHub Actions, Jenkins).</li>
+            <li>Refactored and stabilized legacy systems to improve maintainability, data integrity, and production reliability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- JCI Bolivia -->
+      <div class="timeline-item current">
+        <div class="timeline-marker"></div>
+        <div class="timeline-card">
+          <div class="tc-header">
+            <div class="tc-title">Head of IT Commission · Technical Lead</div>
+            <div class="tc-badges">
+              <span class="badge badge-period">2025 — Present</span>
+              <span class="badge badge-current">Current</span>
+            </div>
+          </div>
+          <div class="tc-company">Junior Chamber International (JCI) Bolivia</div>
+          <div class="tc-location">Bolivia &amp; St. Louis, Missouri, USA</div>
+          <ul class="tc-bullets">
+            <li>Led the IT Commission, defining the technological strategy for digital initiatives at national and international level.</li>
+            <li>Acted as technical and architectural authority, aligning business objectives with software and AI-driven solutions.</li>
+            <li>Oversaw digital platforms, web management, and internal systems for the organization.</li>
+            <li>Provided technical leadership combining software development expertise, cloud knowledge, and IT governance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tekhne Academy -->
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-card">
+          <div class="tc-header">
+            <div class="tc-title">Digital Administrator &amp; Technology Instructor</div>
+            <div class="tc-badges">
+              <span class="badge badge-period">2019 — 2021</span>
+            </div>
+          </div>
+          <div class="tc-company">Tekhne Academy</div>
+          <div class="tc-location">Cochabamba, Bolivia</div>
+          <ul class="tc-bullets">
+            <li>Administered digital learning platforms and managed web-based educational systems.</li>
+            <li>Taught IT fundamentals, networking, and systems concepts to students at various levels.</li>
+            <li>Supported Cisco Networking Academy programs and hands-on technical labs.</li>
+            <li>Combined technical work with mentoring and instruction, bridging theory and practice.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Municipal Government -->
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-card">
+          <div class="tc-header">
+            <div class="tc-title">Systems Maintenance &amp; Software Engineer</div>
+            <div class="tc-badges">
+              <span class="badge badge-period">2013 — 2017</span>
+            </div>
+          </div>
+          <div class="tc-company">Autonomous Municipal Government of Sacaba</div>
+          <div class="tc-location">Sacaba, Cochabamba, Bolivia</div>
+          <ul class="tc-bullets">
+            <li>Maintained and enhanced information systems for health, education, and public security institutions.</li>
+            <li>Developed custom software systems, databases, and internal web platforms for municipal operations.</li>
+            <li>Supported IT infrastructure, networking, and system administration across government departments.</li>
+            <li>Participated in digital transformation initiatives within public administration environments.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
