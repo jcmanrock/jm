@@ -110,9 +110,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // ── Data ──────────────────────────────────────────────────────────────────
   readonly stats = [
-    { num: '12+', label: 'Years of Experience' },
-    { num: '5+', label: 'Companies' },
-    { num: '20+', label: 'Technologies' },
+    { num: '5+', label: 'Years of Experience' },
+    { num: '4', label: 'Companies' },
+    { num: '15+', label: 'Technologies' },
     { num: 'MSc', label: 'Cybersecurity · UCM Madrid' }
   ];
 
