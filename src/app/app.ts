@@ -236,16 +236,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly certifications: Certification[] = [
     {
-      name: 'MTCNA – Mikrotik Certified Network Associate',
-      issuer: 'Mikrotik',
-      year: '2018',
-      code: '1811NA5929'
+      name: 'C# Essential Training (1 & 2)',
+      issuer: 'LinkedIn Learning',
+      year: '2023'
     },
     {
-      name: 'MTCUME – Mikrotik Certified User Management Engineer',
-      issuer: 'Mikrotik',
-      year: '2018',
-      code: '1812UME8110'
+      name: 'Experto en Ethical Hacking (I, II, III)',
+      issuer: 'Seguridad Cero – Perú',
+      year: '2021'
     },
     {
       name: 'CCNA v7: Enterprise Networking, Security & Automation',
@@ -268,14 +266,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       year: '2020'
     },
     {
-      name: 'Experto en Ethical Hacking (I, II, III)',
-      issuer: 'Seguridad Cero – Perú',
-      year: '2019–2021'
+      name: 'MTCNA – Mikrotik Certified Network Associate',
+      issuer: 'Mikrotik',
+      year: '2018',
+      code: '1811NA5929'
     },
     {
-      name: 'C# Essential Training (1 & 2)',
-      issuer: 'LinkedIn Learning',
-      year: '2022–2023'
+      name: 'MTCUME – Mikrotik Certified User Management Engineer',
+      issuer: 'Mikrotik',
+      year: '2018',
+      code: '1812UME8110'
     }
   ];
 
