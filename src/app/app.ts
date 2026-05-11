@@ -135,8 +135,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       title: 'Head of IT Commission · Technical Lead',
       company: 'Junior Chamber International (JCI) Bolivia',
       location: 'Bolivia & St. Louis, Missouri, USA',
-      period: '2025 — Present',
-      current: true,
+      period: '2025',
+      current: false,
       bullets: [
         'Led the IT Commission, defining the technological strategy for digital initiatives at national and international level.',
         'Acted as technical and architectural authority, aligning business objectives with software and AI-driven solutions.',
