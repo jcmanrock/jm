@@ -236,9 +236,75 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly certifications: Certification[] = [
     {
-      name: 'C# Essential Training (1 & 2)',
+      name: 'Introduction to Subagents',
+      issuer: 'Anthropic',
+      year: 'May 2026',
+      code: 'tjdwn9yxpum8'
+    },
+    {
+      name: 'Introduction to Model Context Protocol',
+      issuer: 'Anthropic',
+      year: 'May 2026',
+      code: '3n5a9kp7gc6s'
+    },
+    {
+      name: 'Introduction to Agent Skills',
+      issuer: 'Anthropic',
+      year: 'May 2026',
+      code: 'jrynw92u5wzs'
+    },
+    {
+      name: 'Claude Code in Action',
+      issuer: 'Anthropic',
+      year: 'May 2026',
+      code: '3k7zhpwk97xb'
+    },
+    {
+      name: 'Curso de GitHub Copilot',
+      issuer: 'Platzi',
+      year: 'Apr 2025',
+      code: 'f89be2a2-4d61-47c4-95e6-99e7b8808afb'
+    },
+    {
+      name: 'AWS Educate Introduction to Generative AI',
+      issuer: 'Amazon Web Services (AWS)',
+      year: 'Apr 2025'
+    },
+    {
+      name: 'Cybersecurity Awareness Learner',
+      issuer: 'CertiProf',
+      year: 'Dec 2024'
+    },
+    {
+      name: 'Curso de Introducción a la Nube',
+      issuer: 'Platzi',
+      year: 'Jul 2024',
+      code: '4f6f33fb-adb8-451f-b194-23347b625bc1'
+    },
+    {
+      name: 'Instructor 5 Years of Service',
+      issuer: 'Cisco',
+      year: 'Jan 2024'
+    },
+    {
+      name: 'C# Essential Training 1: Types and Control Flow',
       issuer: 'LinkedIn Learning',
-      year: '2023'
+      year: 'May 2023'
+    },
+    {
+      name: 'C# Essential Training 2: Flow Control, Arrays & Exception Handling',
+      issuer: 'LinkedIn Learning',
+      year: 'Jan 2022'
+    },
+    {
+      name: 'CSS Essential Training',
+      issuer: 'LinkedIn Learning',
+      year: 'Jan 2022'
+    },
+    {
+      name: 'Git: Branches, Merges, and Remotes',
+      issuer: 'LinkedIn Learning',
+      year: 'Dec 2021'
     },
     {
       name: 'Experto en Ethical Hacking (I, II, III)',
@@ -246,9 +312,19 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       year: '2021'
     },
     {
-      name: 'CCNA v7: Enterprise Networking, Security & Automation',
+      name: 'Instructor 1 Year of Service',
+      issuer: 'Cisco',
+      year: 'Jan 2021'
+    },
+    {
+      name: 'CCNA: Enterprise Networking, Security & Automation',
       issuer: 'Cisco Networking Academy',
-      year: '2020'
+      year: 'Aug 2020'
+    },
+    {
+      name: 'Introduction to Cybersecurity',
+      issuer: 'Cisco',
+      year: 'Apr 2020'
     },
     {
       name: 'PCAP: Programming Essentials in Python',
