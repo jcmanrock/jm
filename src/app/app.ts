@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   // ── Typewriter ──────────────────────────────────────────────────────────────
   readonly typewriterTitles = [
     'AI Software Development Engineer',
-    'Multi-Agent Systems Architect',
+    'Multi-Agent AI Developer',
     'Full-Stack Developer & AI Builder',
     'Cybersecurity MSc · Cloud Engineer'
   ];
