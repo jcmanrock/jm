@@ -2,7 +2,7 @@ import {
   Component, OnInit, OnDestroy, signal, computed,
   AfterViewInit, ElementRef, ViewChild, HostListener, PLATFORM_ID, Inject
 } from '@angular/core';
-import { isPlatformBrowser, NgFor, NgIf, NgClass } from '@angular/common';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
@@ -39,7 +39,7 @@ interface SkillGroup {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgFor, NgIf, NgClass, FormsModule],
+  imports: [NgFor, NgIf, FormsModule],
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   animations: [
