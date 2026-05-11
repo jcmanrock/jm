@@ -1,6 +1,6 @@
 # John C. Mancilla — Portfolio
 
-Personal portfolio site for **John Clever Mancilla Rocabado**, IT professional and AI Software Development Engineer.
+Personal portfolio site for **John Mancilla**, IT professional and AI Software Development Engineer.
 
 🌐 **Live site:** https://jcmanrock.github.io/jm/
 
