@@ -266,6 +266,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       code: 'f89be2a2-4d61-47c4-95e6-99e7b8808afb'
     },
     {
+      name: 'AWS Cloud Practitioner Essentials',
+      issuer: 'Amazon Web Services (AWS)',
+      year: 'May 2026'
+    },
+    {
       name: 'AWS Educate Introduction to Generative AI',
       issuer: 'Amazon Web Services (AWS)',
       year: 'Apr 2025'
